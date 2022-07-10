@@ -41,7 +41,42 @@ class StoreArticleController {
   };
 
   public intializeRoutes() {
+    /**
+     * @swagger
+     * /:
+     *   get:
+     *     description: Get all entries from API
+     *     responses:
+     *       200:
+     *         description: Success,
+     *       500:
+     *         description: API server side error
+     *
+     */
     this.router.get("/", this.getAll);
+
+    /**
+     * @swagger
+     * /categoryName/{categoryName}/id/{id}:
+     *   get:
+     *     description: Get item by categoryName and id
+     *     parameters:
+     *      - in: path
+     *        name: categoryName
+     *        description: category of item
+     *        required: true
+     *        type: string
+     *      - in: path
+     *        name: id
+     *        description: id of item
+     *        required: true
+     *        type: number
+     *     responses:
+     *       200:
+     *         description: Created
+     *       400:
+     *         description: User error, parameter id is not a number or item is not found
+     */
     this.router.get(
       "/categoryName/:categoryName/id/:id",
       this.getByCategroyAndId

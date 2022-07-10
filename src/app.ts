@@ -6,16 +6,41 @@ import path from "path";
 import "express-async-errors";
 import { CustomError } from "./exceptions/custom-error.exception";
 import cors from "cors";
+import swaggerUI from "swagger-ui-express";
+import swaggerJsDoc from "swagger-jsdoc";
 
 class App {
   public app: express.Application;
   public port: number;
   public host: string;
-
+  public swaggerDocs: object;
   constructor(controllers: any) {
     this.app = express();
     this.port = config.get("port") as number;
     this.host = config.get("host") as string;
+    /**
+     * @swagger
+     * /books:
+     *   get:
+     *     description: Get all books
+     *     responses:
+     *       200:
+     *         description: Success
+     *
+     */
+    const swaggerOptions: swaggerJsDoc.Options = {
+      swaggerDefinition: {
+        info: {
+          title: "Node MVC OOP Api",
+          version: "1.0.0",
+        },
+      },
+      apis: [
+        `${__dirname}/controller/external/store-article.controller.ts`,
+        `${__dirname}/controller/emailer/emailer.controller.ts`,
+      ],
+    };
+    this.swaggerDocs = swaggerJsDoc(swaggerOptions);
 
     this.initilizeViews();
     this.initializeMiddlewares();
@@ -43,6 +68,11 @@ class App {
     this.app.use(express.urlencoded({ extended: false }));
 
     this.app.use(cors());
+    this.app.use(
+      "/api-docs",
+      swaggerUI.serve,
+      swaggerUI.setup(this.swaggerDocs)
+    );
   }
 
   private initializeErrorHandlerMiddleware() {
