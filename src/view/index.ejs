@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>ExpressJS TypeScript API </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+
+<body>
+    <%- include('partials/header') %>
+
+        <div class="container-fluid d-flex justify-content-center align-items-center flex-wrap gap-3  mt-5"
+            style="padding-bottom: 10rem;">
+
+            <% var data=data; %>
+
+
+                <% for(var i=0; i< data.length; i++) {%>
+
+                    <div class="cards">
+                        <div class="card" style="width: 18rem; height: 20rem;">
+                            <img onclick="javascript:window.location.href= `categoryName/<%= data[i].category %>/id/<%= data[i].id %>`"
+                                class="card-img-top  img-thumbnail mt-2 mb-0 mx-auto" style="height: 5rem; width:5rem;"
+                                src=<%=data[i].image %> alt="Card image cap">
+                            <div class="card-body">
+
+                                <h5 class="card-title">
+                                    <%= data[i].title %>
+                                </h5>
+
+                                <a href="#" class="btn btn-primary" style="pointer-events: none;">
+                                    <%= data[i].category %>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <% } %>
+                        <%- include('partials/footer') %>
+        </div>
+
+        <div class="container">
+            <!--Section: Contact v.2-->
+            <section class="mb-4" style="padding-bottom: 10rem;">
+
+                <!--Section heading-->
+                <h2 class="h1-responsive font-weight-bold text-center my-4">Contact us</h2>
+                <!--Section description-->
+                <p class="text-center w-responsive mx-auto mb-5">Do you have any questions? Please do not hesitate to
+                    contact us directly. Our team will come back to you within
+                    a matter of hours to help you.</p>
+
+                <div class="row">
+
+                    <!--Grid column-->
+                    <div class="col-md-12 mb-md-0 mb-5">
+                        <form id="contact-form" name="contact-form" method="POST" action="email-sent.ejs">
+
+                            <!--Grid row-->
+                            <div class="row">
+
+                                <!--Grid column-->
+                                <div class="col-md-6">
+                                    <div class="md-form mb-0">
+                                        <input type="text" id="name" name="name" class="form-control">
+                                        <label for="name" class="">Your name</label>
+                                    </div>
+                                </div>
+                                <!--Grid column-->
+
+                                <!--Grid column-->
+                                <div class="col-md-6">
+                                    <div class="md-form mb-0">
+                                        <input type="text" id="email" name="email" class="form-control">
+                                        <label for="email" class="">Your email</label>
+                                    </div>
+                                </div>
+                                <!--Grid column-->
+
+                            </div>
+                            <!--Grid row-->
+
+                            <!--Grid row-->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="md-form mb-0">
+                                        <input type="text" id="favorite" name="favorite" class="form-control">
+                                        <label for="favorite" class="">Favorite Category</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center text-md-left">
+                                <button disabled id="submit" class="btn btn-primary">Submit</button>
+
+                            </div>
+                        </form>
+
+                        <div class="status"></div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+        <script>
+            //var data is now assigned to getTest which will only work on browsers
+            const getData = "<%= data  %>"
+
+            const form = document.getElementById("contact-form");
+            const email = document.getElementById("email");
+            const name = document.getElementById("name");
+            const favorite = document.getElementById("favorite");
+            const submitBtn = document.getElementById("submit");
+
+
+            form.addEventListener('submit', function (event) {
+
+                event.preventDefault();
+                submitForm();
+
+            });
+
+            const submitForm = async () => {
+
+                const req = new XMLHttpRequest();
+
+                req.open("POST", "/send-email");
+                req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+                const reqBody = { email: email.value, name: name.value, favorite: favorite.value }
+
+                req.send(JSON.stringify(reqBody));
+
+                req.onload = () => {
+                    document.write(req.responseText)
+                };
+
+            }
+
+
+
+            const handleError = (err) => {
+                console.warn(err);
+            };
+
+            const updateSubmitBtn = () => {
+                const emailValue = email.value.trim();
+                const nameValue = name.value.trim();
+                const favoriteValue = favorite.value.trim();
+
+                if (emailValue && nameValue && favoriteValue) {
+                    submitBtn.removeAttribute('disabled');
+                } else {
+                    submitBtn.setAttribute('disabled', 'disabled');
+                }
+            }
+
+            email.addEventListener('change', updateSubmitBtn);
+            name.addEventListener('change', updateSubmitBtn);
+            favorite.addEventListener('change', updateSubmitBtn);
+
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>

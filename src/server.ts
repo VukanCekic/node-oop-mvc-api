@@ -1,6 +1,12 @@
 import App from "./app";
-import ExternalController from "./controller/external/external";
+import EmailerController from "./controller/emailer/emailer.controller";
+import StoreArticleController from "./controller/external/store-article.controller";
+const http = require("http");
 
-const app = new App([new ExternalController()]);
+(async () => {
+  const externalController = await StoreArticleController.CreateAsync();
+  const emailController = new EmailerController();
 
-app.listen();
+  const app = new App([externalController, emailController]);
+  app.listen();
+})();
