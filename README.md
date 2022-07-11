@@ -6,11 +6,11 @@ To see all the routes and required parameters check the following route, BASE_RO
 # Running the App
 npm i, to install all dependencies.
 
-Production
+## Production
 "postinstall": "tsc",
  "start": "node src/server.js"
  
- Development
+ ## Development
  "dev": "nodemon --config nodemon.json src/server.ts",
  
 # About the App
