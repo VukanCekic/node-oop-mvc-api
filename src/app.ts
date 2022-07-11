@@ -17,16 +17,7 @@ class App {
     this.app = express();
 
     this.port = config.get("port") as number;
-    /**
-     * @swagger
-     * /books:
-     *   get:
-     *     description: Get all books
-     *     responses:
-     *       200:
-     *         description: Success
-     *
-     */
+
     const swaggerOptions: swaggerJsDoc.Options = {
       swaggerDefinition: {
         info: {
