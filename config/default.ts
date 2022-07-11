@@ -1,8 +1,7 @@
 // Default Config for application
 
 module.exports = {
-  port: 3000,
-  host: "localhost",
+  port: process.env.PORT || 3000,
   fakeStoreApi: "https://fakestoreapi.com/products",
   emailerService: "hotmail",
   emailerUser: "nodeapitest@hotmail.com",

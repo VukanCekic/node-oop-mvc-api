@@ -17,7 +17,6 @@ class App {
     constructor(controllers) {
         this.app = (0, express_1.default)();
         this.port = config_1.default.get("port");
-        this.host = config_1.default.get("host");
         /**
          * @swagger
          * /books:
@@ -69,8 +68,8 @@ class App {
         this.app.use(error_handler_middleware_1.default);
     }
     listen() {
-        this.app.listen(this.port, this.host, () => {
-            logger_1.logger.info(`Server listening on host: ${this.host} and port: ${this.port}`);
+        this.app.listen(this.port, () => {
+            logger_1.logger.info(`Server listening on port: ${this.port}`);
         });
     }
 }

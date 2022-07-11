@@ -12,13 +12,11 @@ import swaggerJsDoc from "swagger-jsdoc";
 class App {
   public app: express.Application;
   public port: number;
-  public host: string;
   public swaggerDocs: object;
   constructor(controllers: any) {
     this.app = express();
 
     this.port = config.get("port") as number;
-    this.host = config.get("host") as string;
     /**
      * @swagger
      * /books:
@@ -81,10 +79,8 @@ class App {
   }
 
   public listen() {
-    this.app.listen(this.port, this.host, () => {
-      logger.info(
-        `Server listening on host: ${this.host} and port: ${this.port}`
-      );
+    this.app.listen(this.port, () => {
+      logger.info(`Server listening on port: ${this.port}`);
     });
   }
 }
