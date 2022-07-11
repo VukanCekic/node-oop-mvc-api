@@ -1,7 +1,6 @@
 "use strict";
 // Default Config for application
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = {
+module.exports = {
     port: 3000,
     host: "localhost",
     fakeStoreApi: "https://fakestoreapi.com/products",

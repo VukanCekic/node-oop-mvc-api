@@ -1,6 +1,6 @@
 // Default Config for application
 
-export default {
+module.exports = {
   port: 3000,
   host: "localhost",
   fakeStoreApi: "https://fakestoreapi.com/products",
