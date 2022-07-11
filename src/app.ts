@@ -16,6 +16,7 @@ class App {
   public swaggerDocs: object;
   constructor(controllers: any) {
     this.app = express();
+
     this.port = config.get("port") as number;
     this.host = config.get("host") as string;
     /**
