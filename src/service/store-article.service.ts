@@ -27,7 +27,7 @@ class StoreArticleService {
         "StoreArticleService :: getByCategroyAndId :: Item with the given category and id not found"
       );
       throw new CustomError(
-        "Item with the given category and title not found",
+        "Item with the given category and id not found",
         400
       );
     }
