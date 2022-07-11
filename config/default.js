@@ -3,7 +3,7 @@
 module.exports = {
     port: process.env.PORT || 3000,
     fakeStoreApi: "https://fakestoreapi.com/products",
-    emailerService: "hotmail",
-    emailerUser: "nodeapitest@hotmail.com",
-    emailerPassword: "Apitestnode1",
+    emailerService: "outlook",
+    emailerUser: "apitestnode@outlook.com",
+    emailerPassword: "nodeapitest1",
 };
