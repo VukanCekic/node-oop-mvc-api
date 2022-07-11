@@ -24,15 +24,15 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.logger = void 0;
-var winston_1 = __importStar(require("winston"));
+const winston_1 = __importStar(require("winston"));
 //Configuring the logger, Label shown, time-stamp shown, print order etc...
-var alignColorsAndTime = winston_1.default.format.combine(winston_1.default.format.colorize({
+const alignColorsAndTime = winston_1.default.format.combine(winston_1.default.format.colorize({
     all: true,
 }), winston_1.default.format.label({
     label: "[LOGGER]",
 }), winston_1.default.format.timestamp({
     format: "YY-MM-DD HH:MM:SS",
-}), winston_1.default.format.printf(function (info) { return " ".concat(info.label, " ").concat(info.timestamp, " ").concat(info.level, " : ").concat(info.message); }));
+}), winston_1.default.format.printf((info) => ` ${info.label} ${info.timestamp} ${info.level} : ${info.message}`));
 exports.logger = (0, winston_1.createLogger)({
     level: "debug",
     format: winston_1.default.format.combine(winston_1.default.format.colorize(), alignColorsAndTime),

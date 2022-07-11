@@ -1,15 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var custom_error_exception_1 = require("../exceptions/custom-error.exception");
-var logger_1 = require("../logger/logger");
-var StoreArticleService = /** @class */ (function () {
-    function StoreArticleService() {
-        this.getByCategroyAndId = function (data, id, categoryName) {
+const custom_error_exception_1 = require("../exceptions/custom-error.exception");
+const logger_1 = require("../logger/logger");
+class StoreArticleService {
+    constructor() {
+        this.getByCategroyAndId = (data, id, categoryName) => {
             if (Number.isNaN(Number(id))) {
                 logger_1.logger.error("StoreArticleService :: getByCategroyAndId :: ID for article is not a number");
                 throw new custom_error_exception_1.CustomError("Provided ID is not a number", 400);
             }
-            var filtered = data.filter(function (item) {
+            const filtered = data.filter((item) => {
                 return item.category === categoryName && item.id === parseInt(id);
             });
             if (!filtered || filtered.length === 0) {
@@ -19,6 +19,5 @@ var StoreArticleService = /** @class */ (function () {
             return filtered;
         };
     }
-    return StoreArticleService;
-}());
+}
 exports.default = StoreArticleService;

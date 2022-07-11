@@ -2,12 +2,12 @@
   "name": "api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "dev": "nodemon --config nodemon.json src/server.ts",
     "deploy": "git add . && git commit -m Heroku && git push heroku master",
     "postinstall": "tsc",
-    "start": "node dist/src/server.js"
+    "start": "node src/server.js"
   },
   "author": "",
   "license": "ISC",
