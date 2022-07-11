@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --config nodemon.json src/server.ts"
+    "dev": "nodemon --config nodemon.json src/server.ts",
+    "deploy": "git add . && git commit -m Heroku && git push heroku master",
+    "postinstall": "tsc",
+    "start": "node dist/src/server.js"
   },
   "author": "",
   "license": "ISC",
